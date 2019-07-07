@@ -1,0 +1,13 @@
+CASE
+WHEN Default Channel Grouping = 'Direct' THEN 'Direct' 
+WHEN Default Channel Grouping = 'Paid Search' THEN 'Paid Search' 
+WHEN Default Channel Grouping = 'Organic Search' THEN 'Organic Search' 
+WHEN Default Channel Grouping = 'Referral' THEN 'Referral'
+WHEN REGEXP_MATCH(Source, '.*(ClickDimensions|Directmail|mail|Nyhedsbrev).*') THEN 'Email' 
+WHEN Medium = 'email' THEN 'Email' 
+WHEN REGEXP_MATCH(Source / Medium, '.*(Facebook|facebook|instagram).*(referral|opslag).*') THEN 'Organic Social' 
+WHEN REGEXP_MATCH(Source / Medium, '.*(Facebook|facebook|instagram).*(Annonce|annonce|post|ppc|cpc).*') THEN 'Paid Social' 
+WHEN REGEXP_MATCH(Source / Medium, '.*(google).*(cpc).*') THEN 'Paid Search' 
+WHEN Medium = 'referral' THEN 'Referral'
+ELSE 'Other' 
+END
